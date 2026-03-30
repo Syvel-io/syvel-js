@@ -79,18 +79,18 @@ const result = await syvel.check("yopmail.com");
 
 ### Response
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `email` | `string` | Masked input — local part is never exposed in plain text |
-| `is_risky` | `boolean` | `true` if `risk_score` ≥ threshold (default: 65) |
-| `risk_score` | `number` | 0 (safe) to 100 (confirmed disposable) |
-| `reason` | `string` | `"safe"` · `"disposable"` · `"undeliverable"` · `"role_account"` |
-| `deliverability_score` | `number` | 0 (unlikely) to 100 (very likely to be delivered) |
-| `did_you_mean` | `string \| null` | Typo correction suggestion |
-| `is_free_provider` | `boolean` | Consumer webmail (Gmail, Yahoo…) |
-| `is_corporate_email` | `boolean` | Business domain with professional MX |
-| `is_alias_email` | `boolean` | Privacy alias service (SimpleLogin, AnonAddy…) |
-| `mx_provider_label` | `string \| null` | Human-readable MX provider name |
+| Field                  | Type             | Description                                                      |
+| ---------------------- | ---------------- | ---------------------------------------------------------------- |
+| `email`                | `string`         | Masked input — local part is never exposed in plain text         |
+| `is_risky`             | `boolean`        | `true` if `risk_score` ≥ threshold (default: 65)                 |
+| `risk_score`           | `number`         | 0 (safe) to 100 (confirmed disposable)                           |
+| `reason`               | `string`         | `"safe"` · `"disposable"` · `"undeliverable"` · `"role_account"` |
+| `deliverability_score` | `number`         | 0 (unlikely) to 100 (very likely to be delivered)                |
+| `did_you_mean`         | `string \| null` | Typo correction suggestion                                       |
+| `is_free_provider`     | `boolean`        | Consumer webmail (Gmail, Yahoo…)                                 |
+| `is_corporate_email`   | `boolean`        | Business domain with professional MX                             |
+| `is_alias_email`       | `boolean`        | Privacy alias service (SimpleLogin, AnonAddy…)                   |
+| `mx_provider_label`    | `string \| null` | Human-readable MX provider name                                  |
 
 ## Error handling
 
@@ -122,14 +122,14 @@ try {
 }
 ```
 
-| Error class | Cause |
-|-------------|-------|
-| `SyvelAuthError` | Invalid or missing API key (HTTP 401) |
-| `SyvelForbiddenError` | Origin not whitelisted for this key (HTTP 403) |
-| `SyvelValidationError` | Invalid email or domain format (HTTP 422) |
-| `SyvelRateLimitError` | Monthly quota exceeded (HTTP 429) |
-| `SyvelTimeoutError` | Request exceeded the configured timeout |
-| `SyvelError` | Base class — all other API errors |
+| Error class            | Cause                                          |
+| ---------------------- | ---------------------------------------------- |
+| `SyvelAuthError`       | Invalid or missing API key (HTTP 401)          |
+| `SyvelForbiddenError`  | Origin not whitelisted for this key (HTTP 403) |
+| `SyvelValidationError` | Invalid email or domain format (HTTP 422)      |
+| `SyvelRateLimitError`  | Monthly quota exceeded (HTTP 429)              |
+| `SyvelTimeoutError`    | Request exceeded the configured timeout        |
+| `SyvelError`           | Base class — all other API errors              |
 
 All error classes extend `SyvelError`, which extends the native `Error`.
 
@@ -209,7 +209,12 @@ import { Syvel } from "@syvel/js";
 const syvel = new Syvel({ apiKey: "sv_your_key" });
 
 function SignupForm() {
-  const { register, handleSubmit, setError, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = async (data) => {
     try {

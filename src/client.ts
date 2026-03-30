@@ -62,15 +62,12 @@ export class Syvel {
     const timer = setTimeout(() => controller.abort(), this.timeout);
 
     try {
-      const response = await fetch(
-        `${this.baseUrl}/v1/check/${encodeURIComponent(target)}`,
-        {
-          headers: {
-            Authorization: `Bearer ${this.apiKey}`,
-          },
-          signal: controller.signal,
+      const response = await fetch(`${this.baseUrl}/v1/check/${encodeURIComponent(target)}`, {
+        headers: {
+          Authorization: `Bearer ${this.apiKey}`,
         },
-      );
+        signal: controller.signal,
+      });
 
       clearTimeout(timer);
 
@@ -100,25 +97,22 @@ export class Syvel {
       case 403:
         throw new SyvelForbiddenError();
       case 422: {
-        const body = await response.json().catch(() => ({})) as {
+        const body = (await response.json().catch(() => ({}))) as {
           detail?: string | null;
         };
         throw new SyvelValidationError(body.detail);
       }
       case 429: {
-        const body = await response.json().catch(() => ({})) as {
+        const body = (await response.json().catch(() => ({}))) as {
           reset_at?: string;
         };
         throw new SyvelRateLimitError(body.reset_at);
       }
       default: {
-        const body = await response.json().catch(() => ({})) as {
+        const body = (await response.json().catch(() => ({}))) as {
           message?: string;
         };
-        throw new SyvelError(
-          body.message ?? `HTTP ${response.status}`,
-          response.status,
-        );
+        throw new SyvelError(body.message ?? `HTTP ${response.status}`, response.status);
       }
     }
   }

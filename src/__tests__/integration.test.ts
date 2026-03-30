@@ -12,11 +12,7 @@
  */
 
 import { beforeAll, describe, expect, it } from "vitest";
-import {
-  Syvel,
-  SyvelAuthError,
-  SyvelValidationError,
-} from "../index.js";
+import { Syvel, SyvelAuthError, SyvelValidationError } from "../index.js";
 
 const apiKey = process.env.SYVEL_API_KEY;
 
@@ -97,8 +93,6 @@ describeIfKey("Integration — error handling", () => {
 
   it("throws SyvelValidationError for an invalid domain", async () => {
     const client = new Syvel({ apiKey: apiKey! });
-    await expect(client.check("not a valid domain")).rejects.toBeInstanceOf(
-      SyvelValidationError,
-    );
+    await expect(client.check("not a valid domain")).rejects.toBeInstanceOf(SyvelValidationError);
   });
 });

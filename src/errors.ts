@@ -56,11 +56,7 @@ export class SyvelForbiddenError extends SyvelError {
  */
 export class SyvelValidationError extends SyvelError {
   constructor(detail?: string | null) {
-    super(
-      detail ?? "Invalid email or domain format",
-      422,
-      "VALIDATION_ERROR",
-    );
+    super(detail ?? "Invalid email or domain format", 422, "VALIDATION_ERROR");
     this.name = "SyvelValidationError";
   }
 }

@@ -35,6 +35,7 @@
       }
     }
   },
+  "sideEffects": false,
   "files": [
     "dist",
     "LICENSE",
@@ -49,9 +50,11 @@
     "lint:check": "eslint src",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run typecheck && npm run lint:check && npm run build && npm test"
+    "release": "npm run build && changeset publish",
+    "prepublishOnly": "npm run typecheck && npm run lint:check && npm test"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.30.0",
     "@eslint/js": "^10.0.1",
     "eslint": "^10.1.0",
     "prettier": "^3.8.1",

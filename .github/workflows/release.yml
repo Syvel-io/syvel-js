@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write       # to create tags and push commits
+      pull-requests: write  # to open and update the Release PR
+      id-token: write       # for npm provenance
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history needed for changesets to detect what changed
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+
+      - run: npm ci
+
+      - name: Create Release PR or publish to npm
+        uses: changesets/action@v1
+        with:
+          # Script called when the Release PR is merged
+          publish: npm run release
+          # Commit message used when changesets bumps versions
+          commit: "chore: release"
+          # Title of the auto-generated Release PR
+          title: "chore: release"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

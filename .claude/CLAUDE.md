@@ -21,8 +21,9 @@
 - `src/__tests__/client.test.ts` — tests unitaires (fetch mocké)
 - `src/__tests__/integration.test.ts` — tests d'intégration (API réelle)
 - `.github/workflows/ci.yml` — CI typecheck + lint + tests unitaires sur chaque push
+- `.github/workflows/release.yml` — CI Changesets : crée la Release PR ou publie sur npm
 - `.github/workflows/integration.yml` — CI tests d'intégration sur push main
-- `.github/workflows/publish.yml` — CI publication npm sur tag v*
+- `.changeset/config.json` — configuration Changesets (access, baseBranch…)
 
 ## Conventions
 

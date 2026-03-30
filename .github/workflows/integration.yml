@@ -18,6 +18,16 @@ jobs:
 
       - run: npm ci
 
+      - name: Check secret is configured
+        run: |
+          if [ -z "$SYVEL_API_KEY" ]; then
+            echo "❌ SYVEL_API_KEY secret is not configured in this repository."
+            echo "Add it under Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+        env:
+          SYVEL_API_KEY: ${{ secrets.SYVEL_API_KEY }}
+
       - run: npm run test:integration
         env:
           SYVEL_API_KEY: ${{ secrets.SYVEL_API_KEY }}

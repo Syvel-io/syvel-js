@@ -20,8 +20,9 @@
 - `src/index.ts` — exports publics du package
 - `src/__tests__/client.test.ts` — tests unitaires (fetch mocké)
 - `src/__tests__/integration.test.ts` — tests d'intégration (API réelle)
-- `.github/workflows/publish.yml` — CI publication npm sur tag v*
+- `.github/workflows/ci.yml` — CI typecheck + lint + tests unitaires sur chaque push
 - `.github/workflows/integration.yml` — CI tests d'intégration sur push main
+- `.github/workflows/publish.yml` — CI publication npm sur tag v*
 
 ## Conventions
 

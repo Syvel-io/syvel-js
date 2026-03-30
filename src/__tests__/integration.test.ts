@@ -78,10 +78,10 @@ describeIfKey("Integration — checkEmail()", () => {
     expect(result!.reason).toBe("role_account");
   });
 
-  it("suggests a correction for a typo (gmial.com)", async () => {
-    const result = await client.checkEmail("user@gmial.com");
+  it("suggests a correction for a typo (ropmail.com → hotmail.com)", async () => {
+    const result = await client.checkEmail("user@ropmail.com");
     expect(result).not.toBeNull();
-    expect(result!.did_you_mean).toBe("gmail.com");
+    expect(result!.did_you_mean).toBe("hotmail.com");
   });
 });
 

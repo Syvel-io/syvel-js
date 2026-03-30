@@ -1,0 +1,23 @@
+name: Integration tests
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # allow manual trigger from GitHub UI
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+
+      - run: npm run test:integration
+        env:
+          SYVEL_API_KEY: ${{ secrets.SYVEL_API_KEY }}
